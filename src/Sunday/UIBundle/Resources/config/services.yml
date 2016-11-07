@@ -1,0 +1,11 @@
+parameters:
+    sunday_ui.twig_ui_extension.class: Sunday\UIBundle\Twig\UIExtension
+
+services:
+    sunday.ui.twig_extension:
+        class: %sunday_ui.twig_ui_extension.class%
+        public: false
+        arguments:
+            - @doctrine.orm.entity_manager
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,16 @@
+parameters:
+    sunday_media.user_registration_avatar.class: Sunday\MediaBundle\EventListener\UserRegistrationAvatarListener
+    sunday_media.file.class: Sunday\MediaBundle\Entity\File
+
+services:
+    sunday.media.user_registration_avatar_listener:
+        class: %sunday_media.user_registration_avatar.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @translator
+            - %kernel.root_dir%
+        tags:
+            - { name: kernel.event_subscriber, event: kernel.request, method: onUserRegistrationAvatarSuccess }
+    sunday.media.inject_root_to_file:
+        class: %sunday_media.file.class%
+        arguments: ['%kernel.root_dir%']

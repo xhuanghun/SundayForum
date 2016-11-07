@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2016-10-11T11:03:11Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="4238dc412264a2a32df5a4a7edede2dd28beed93" resname="Choose one">
+        <source>Choose one</source>
+        <target>Choose File</target>
+        <jms:reference-file line="30">/../src/Sunday/UserBundle/Form/Type/RegistrationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e90d744690b88c66a62b96d165e8c0e7e944495f" resname="form.avatar">
+        <source>form.avatar</source>
+        <target>Avatar</target>
+        <jms:reference-file line="38">/../src/Sunday/UserBundle/Form/Type/RegistrationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="edee06b4bed5259a1cb82a0f9f3ee2dae1b800f0" resname="form.birthday">
+        <source>form.birthday</source>
+        <target>Birthday</target>
+        <jms:reference-file line="19">/../src/Sunday/UserBundle/Form/Type/RegistrationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="739505aaff1560d87d925a346fa9ecb239c16dfc" resname="form.business_unit">
+        <source>form.business_unit</source>
+        <target>Race</target>
+        <jms:reference-file line="29">/../src/Sunday/UserBundle/Form/Type/RegistrationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="40321daf69630c927b38c706740b955573357bdf" resname="form.upload_avatar.intro_content">
+        <source>form.upload_avatar.intro_content</source>
+        <target>form.upload_avatar.intro_content</target>
+        <jms:reference-file line="12">/../src/Sunday/UIBundle/Resources/views/Window/registerAvatarModal.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="30fcdbf50bdfef59ef24afcd39d58a01f4b040f3" resname="form.upload_avatar.intro_header">
+        <source>form.upload_avatar.intro_header</source>
+        <target>form.upload_avatar.intro_header</target>
+        <jms:reference-file line="11">/../src/Sunday/UIBundle/Resources/views/Window/registerAvatarModal.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1712ef3a51a361d8c2ed09ae00728122fb9b3f2f" resname="form.upload_avatar.title">
+        <source>form.upload_avatar.title</source>
+        <target>form.upload_avatar.title</target>
+        <jms:reference-file line="4">/../src/Sunday/UIBundle/Resources/views/Window/registerAvatarModal.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,57 @@
+<div class="ui dimmer modals page transition hidden">
+    <div class="ui standard test modal transition hidden" style="margin-top: -234px;">
+        <div class="header">
+            {{ 'form.avatarFile.title'|trans({}, 'FOSUserBundle') }}
+        </div>
+        <div class="image content" id="registration-avatar-modal-content">
+            <div class="ui large image">
+                <img id="selected-avatar-image" src="{{ asset('bundles/sundayui/img/icon/avatar-250.png') }}" style="max-width: 350px; border: none;">
+            </div>
+            <div class="description">
+                <div class="ui header">{{ 'form.avatarFile.intro_header'|trans({}, 'FOSUserBundle') }}</div>
+                <p>{{ 'form.avatarFile.intro_content'|trans({}, 'FOSUserBundle') }}</p>
+                <p><input type="file" id="fos_user_registration_input_avatar"></p>
+                <div class="avatar-preview preview-lg"></div>
+                <div class="avatar-preview preview-sm"></div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui black deny button">
+                Nope
+            </div>
+            <div class="ui positive right labeled icon button" id="register-avatar-confirm">
+                Yep, that's me
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/sundayui/js/cropper/cropper.min.css') }}">
+<script src="{{ asset('bundles/sundayui/js/cropper/cropper.min.js') }}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var $image = $("#selected-avatar-image");
+        var $input = $("#fos_user_registration_input_avatar");
+
+        $("input:file").change(function() {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(this.files[0]);
+            oFReader.onload = function (oFREvent) {
+                $image.cropper('destroy');
+                $image.attr('src', this.result);
+                $image.cropper({
+                    aspectRatio: 1,
+                    preview: '.avatar-preview',
+                });
+            }
+        });
+
+        $("#register-avatar-confirm").click(function() {
+            var dataURL  = $image.cropper('getCroppedCanvas', { width: 250, height: 250, fillColor: 'white' }, 'image/jpeg', 1).toDataURL("image/jpeg", 1);
+            var avatarData = dataURL.replace(/^data:image\/(jpeg);base64,/, "");
+            $("#fos_user_registration_form_avatarFile").val(avatarData);
+        });
+    });
+</script>

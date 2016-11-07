@@ -1,0 +1,93 @@
+Sunday\MediaBundle\Entity\Image:
+    sunday_icon:
+        filename: sunday_icon.icon
+        isImage: true
+        uploaded: false
+        description: Nothing, but sunday icon file.
+        path: uploads/bundles/sundayui/image/Sunday.icon
+
+Sunday\ForumBundle\Entity\MenuItem:
+    ## no.1 Sunday项目相关
+    sunday:
+        name: Sunday 项目
+        imageIcon: @sunday_icon
+        color: red
+    issue:
+        name: 问题
+        fontIcon: help circle icon
+        parent: @sunday
+    issue_use:
+        name: 安装问题
+        parent: @issue
+    issue_development:
+        name: 使用问题
+        parent: @issue
+    development:
+        name: 开发议题
+        parent: @sunday
+
+    ## no.2 Symfony资源
+    symfony:
+        name: Symfony 资源
+    awesome_symfony:
+        name: Awesome Symfony
+        inside: false
+        link: https://github.com/sitepoint/awesome-symfony
+        parent: @symfony
+    knpuniversity:
+        name: Knp University
+        inside: false
+        link: https://knpuniversity.com/
+        parent: @symfony
+    symfony_china:
+        name: Symfony China
+        inside: false
+        link: http://symfonychina.com/
+        parent: @symfony
+
+    ## no.3 Symfony 开源项目
+    symfony_project:
+        name: Symfony 开源项目
+    orocrm:
+        name: OroCRM and OroPlatform
+        inside: false
+        link: https://www.orocrm.com/
+        parent: @symfony_project
+    ez_systems:
+        name: eZ Systems and eZ Platform
+        inside: false
+        link: http://ez.no/
+        parent: @symfony_project
+    sonata:
+        name: Sonata Project
+        inside: false
+        link: https://sonata-project.org/
+        parent: @symfony_project
+    sylius:
+        name: Sylius
+        inside: false
+        link: http://sylius.org/
+        parent: @symfony_project
+    thelia:
+        name: Thelia
+        inside: false
+        link: http://thelia.net/
+        parent: @symfony_project
+    kunstmaan:
+        name: Kunstmaan
+        inside: false
+        link: https://bundles.kunstmaan.be/
+        parent: @symfony_project
+    akeneo:
+        name: akeneo
+        inside: false
+        link: https://www.akeneo.com/
+        parent: @symfony_project
+
+    ## no.4 关于本站
+    about:
+        name: 关于本站
+        inside: true
+
+
+

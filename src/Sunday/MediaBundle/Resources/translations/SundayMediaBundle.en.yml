@@ -1,0 +1,8 @@
+folder:
+    image_node: "Image"
+    image_avatar_node: "Avatar"
+    image_default_node: "Default"
+    document_node: "Other Files"
+
+avatar:
+    description: "This is a avatar image"

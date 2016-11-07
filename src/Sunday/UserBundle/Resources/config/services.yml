@@ -1,0 +1,12 @@
+services:
+    sunday.form.registration:
+        class: Sunday\UserBundle\Form\Type\RegistrationType
+        tags:
+            - { name: form.type, alias: sunday_user_registration }
+    sunday.form.blob_hidden:
+        class: Sunday\UserBundle\Form\Type\BlobHiddenType
+        arguments:
+            - %kernel.root_dir%
+        tags:
+            - { name: form.type, alias: sunday_user_blob_hidden }
+

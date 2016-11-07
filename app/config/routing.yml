@@ -1,1 +1,41 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+sunday_forum:
+    resource: "@SundayForumBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+sunday_ui:
+    resource: "@SundayUIBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+sunday_media:
+    resource: "@SundayMediaBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+sunday_post:
+    resource: "@SundayPostBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+sunday_witchcraft:
+    resource: "@SundayWitchcraftBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+sunday_organization:
+    resource: "@SundayOrganizationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+sunday_user:
+    resource: "@SundayUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
 

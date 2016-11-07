@@ -1,0 +1,153 @@
+Sunday\OrganizationBundle\Entity\Organization:
+    dragon_ball:
+        name: 龙珠生态
+        description: 以七龙珠为故事背景的生态系统
+
+Sunday\OrganizationBundle\Entity\BusinessUnit:
+    bu_android:
+        name: 人造人
+        organization: @dragon_ball
+        initServiceGrade: @service_grade_android_init
+        hidden: false
+        color: purple
+    bu_namek:
+        name: 那美克星人
+        organization: @dragon_ball
+        initServiceGrade: @service_grade_namek_init
+        hidden: false
+        color: green
+    bu_earth:
+        name: 地球
+        organization: @dragon_ball
+        initServiceGrade: @service_grade_earth_init
+        hidden: false
+        color: blue
+    bu_lord:
+        name: 神
+        organization: @dragon_ball
+        initServiceGrade: @service_grade_lord_init
+        hidden: false
+        color: black
+    bu_buu:
+        name: 魔人布欧
+        organization: @dragon_ball
+        initServiceGrade: @service_grade_buu
+        hidden: true
+        color: red
+
+Sunday\UserBundle\Entity\ServiceGrade:
+    service_grade_android_init:
+        name: 人造人8号
+        initialValue: 50
+        businessUnit: @bu_android
+        nextLevel: @service_grade_android_mid
+    service_grade_android_mid:
+        name: 人造人16号
+        initialValue: 100
+        businessUnit: @bu_android
+        nextLevel: @service_grade_android_advanced
+    service_grade_android_advanced:
+        name: 人造人19号
+        initialValue: 150
+        businessUnit: @bu_android
+        nextLevel: @service_grade_android_master
+    service_grade_android_master:
+        name: 沙鲁
+        initialValue: 400
+        businessUnit: @bu_android
+        nextLevel: @service_grade_buu
+    service_grade_namek_init:
+        name: 丹迪
+        initialValue: 50
+        businessUnit: @bu_namek
+        nextLevel: @service_grade_namek_mid
+    service_grade_namek_mid:
+        name: 短笛
+        initialValue: 100
+        businessUnit: @bu_namek
+        nextLevel: @service_grade_namek_advanced
+    service_grade_namek_advanced:
+        name: 内鲁
+        initialValue: 200
+        businessUnit: @bu_namek
+        nextLevel: @service_gradenamek_master
+    service_gradenamek_master:
+        name: 那美克星大长老
+        initialValue: 400
+        businessUnit: @bu_namek
+        nextLevel: @service_grade_buu
+    service_grade_earth_init:
+        name: 撒旦
+        initialValue: 10
+        businessUnit: @bu_earth
+        nextLevel: @service_grade_earth_mid
+    service_grade_earth_mid:
+        name: 龟仙人
+        initialValue: 50
+        businessUnit: @bu_earth
+        nextLevel: @service_grade_earth_advanced
+    service_grade_earth_advanced:
+        name: 特南克斯
+        initialValue: 300
+        businessUnit: @bu_earth
+        nextLevel: @service_grade_earth_master
+    service_grade_earth_master:
+        name: 孙悟空
+        initialValue: 500
+        businessUnit: @bu_earth
+        nextLevel: @service_grade_buu
+    service_grade_lord_init:
+        name: 波波先生
+        initialValue: 100
+        businessUnit: @bu_lord
+        nextLevel: @service_grade_lord_mid
+    service_grade_lord_mid:
+        name: 神
+        initialValue: 150
+        businessUnit: @bu_lord
+        nextLevel: @service_grade_lord_advanced
+    service_grade_lord_advanced:
+        name: 界王
+        initialValue: 200
+        businessUnit: @bu_lord
+        nextLevel: @service_grade_lord_master
+    service_grade_lord_master:
+        name: 大界王神
+        initialValue: 300
+        businessUnit: @bu_lord
+        nextLevel: @service_grade_buu
+    service_grade_buu:
+        name: 魔人布欧
+        initialValue: 1000
+        businessUnit: @bu_buu
+
+Sunday\MediaBundle\Entity\Image:
+    avatarForUser{1..16}:
+        user: @user<current()>
+        filename: avatar_for_user<current()>.jpeg
+        isImage: true
+        extension: jpeg
+        uploaded: false
+        description: datafixtures for avatar of user<current()>
+        path: uploads/tmp/avatar/<current()>.jpeg
+
+Sunday\UserBundle\Entity\User:
+    tonygao:
+        username: tony
+        usernameCanonical: tony
+        email: linuxertony@163.com
+        emailCanonical: linuxertony@163.com
+        enabled: true
+        password: $2y$13$a.tAuc9EDbimnGkCvqLMGOHkPRBMmCiou1aQ3wGLsp5tKm5T1qqpi
+        businessUnit: @bu_*
+        organization: @dragon_ball
+    user{1..16}:
+        username: <name()>
+        usernameCanonical: '@user<current()>->username'
+        email: <email()>
+        emailCanonical: '@user<current()>->email'
+        enabled: true
+        password: $2y$13$a.tAuc9EDbimnGkCvqLMGOHkPRBMmCiou1aQ3wGLsp5tKm5T1qqpi
+        businessUnit: @bu_*
+        organization: @dragon_ball
+        avatar: @avatarForUser<current()>

@@ -1,0 +1,49 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<div id="login-form" class="ui four column centered grid">
+    <div class="ui large form segment column login">
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            <div class="two fields">
+                <div class="field">
+                    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="ui icon input">
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                        <i class="blue user icon"></i>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="ui icon input">
+                        <input type="password" id="password" name="_password" required="required" />
+                        <i class="blue lock icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inline field">
+                <div class="ui checkbox">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+            </div>
+
+            <div id="login-button" class="ui left icon input">
+                <input class="ui primary submit button" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+                <i class="arrow circle outline right icon"></i>
+            </div>
+        </form>
+    </div>
+    <div class="login-robot-container">
+        <div class="login-robot-body">
+            <div id="login-robot-bubble" class="ui red stacked segment">
+                <h4>嗯，洗好了在床上等我</h4>
+            </div>
+        </div>
+    </div>
+</div>

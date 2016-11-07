@@ -1,0 +1,305 @@
+{% extends "SundayForumBundle::layout.html.twig" %}
+
+{% block wsSundayContent %}
+    <div class="ui vertical segment">
+        <div class="ui grid">
+            <div class="row">
+                <div id="igorhome" class="twelve wide column">
+                    <div class="status bar">
+                        <div class="ui basic left floated segment">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="public" checked="checked">
+                                <label>系统推荐</label>
+                            </div>
+                        </div>
+                        <div class="ui basic right floated segment">
+                            <i class="large warning sign icon"></i>
+                            <a class="ui red circular label">巫毒状态，你受到攻击</a>
+                            <a class="ui label">
+                                <i class="mail icon"></i> 23
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- I can't find the fucking reason why it's not work for grid width definition
+                         so give it a id and width 770px now, fix it later  -->
+                    <div class="ui grid" id="pantheon-user-info">
+                        <div class="row">
+                            <div class="six wide column">
+                                <div class="ui card">
+                                    <div class="image">
+                                        <img src="{{ asset('bundles/sundayui/img/icon/avatar-250.png') }}">
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">Tony Gao</a>
+                                        <div class="description">
+                                            种族：地球  &nbsp;&nbsp; 等级：撒旦
+                                        </div>
+                                        <div id="card-buttons" class="ui two buttons">
+                                            <div class="mini ui basic green button">关注</div>
+                                            <div class="mini ui basic blue button">私信</div>
+                                        </div>
+                                    </div>
+                                    <div class="extra content">
+                                        <span class="right floated">
+                                            加入于2015年
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ten wide column">
+                                <div id="health-attribute" class="ui segments">
+                                    <div class="ui segment health value">
+                                        <div class="ui top attached label">生命属性</div>
+                                        <div class="health-inline-box">
+                                            <div class="display-title">健康状态</div>
+                                            <div class="display-content">
+                                                <a class="ui green label">健康</a>
+                                                <a class="ui red label">巫毒</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="health-inline-box">
+                                            <div class="display-title">健康值</div>
+                                            <div class="ui indicating small progress active" data-percent="92">
+                                                <div class="bar" style="transition-duration: 300ms; -webkit-transition-duration: 300ms; width: 92%;">
+                                                    <div class="progress">92%</div>
+                                                </div>
+                                                <div class="label">92/100</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui segment">
+                                        <div class="health-inline-box">
+                                            <div class="display-title">等级</div>
+                                            <div class="display-content">
+                                                <a class="ui green label">撒旦</a>
+                                                <a class="ui grey label">龟仙人</a>
+                                                <a class="ui grey label">特南克斯</a>
+                                                <a class="ui grey label">孙悟空</a>
+                                            </div>
+                                        </div>
+                                        <div class="health-inline-box">
+                                            <div class="display-title">技能</div>
+                                            <div class="display-content">
+                                                <a class="ui red label">魔法A</a>
+                                                <a class="ui green label">魔法B</a>
+                                                <a class="ui green label">魔法C</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui segment">
+                                        <div class="health-inline-box">
+                                            <div class="display-title">获得</div>
+                                            <div class="display-content">
+                                                <div class="icon-label-cell">
+                                                    <i class="thumbs up icon"></i><b>1231</b> 赞同
+                                                </div>
+                                                <div class="icon-label-cell">
+                                                    <i class="heart icon"></i><b>34</b> 收藏
+                                                </div>
+                                                <div class="icon-label-cell">
+                                                    <i class="user icon"></i><b>1000</b> 关注
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="health-inline-box">
+                                            <div class="display-title">帖子</div>
+                                            <div class="display-content">
+                                                <div class="icon-label-cell">
+                                                    <i class="forward mail icon"></i><b>1130</b> 回帖
+                                                </div>
+                                                <div class="icon-label-cell">
+                                                    <i class="add circle icon"></i><b>316</b> 发帖
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="ui blue ribbon label">活跃指数</a>
+                                        <div>
+                                            <canvas id="canvas-activity" height="90"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui segments">
+                        <div class="ui segment">
+                            <div class="ui top attached label post comment list">
+                                <a class="ui blue circular label">
+                                    <i class="add circle icon"></i>发帖
+                                </a>
+                                <a class="ui blue circular label light">
+                                    <i class="forward mail icon"></i>回复
+                                </a>
+                                <div class="ui inline dropdown">
+                                    <div class="text">按时间排序</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                        <div class="item">按时间排序</div>
+                                        <div class="item">按回复数量排序</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post comment inline box">
+                                <div class="left cell">
+                                    <div class="title">
+                                        请问想学习PHP，是先从C++入门还是先学C#
+                                    </div>
+                                    <div class="post comment meta inline box">
+                                        <a class="ui grey circular label">蠢问题</a>
+                                        <div class="meta cell">
+                                            <i class="heart icon"></i>4人收藏
+                                        </div>
+                                        <div class="meta cell">
+                                            <i class="thumbs up icon"></i>共34个赞同
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right cell">
+                                    <a class="ui grey circular label">
+                                        <i class="comments icon"></i> 12
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segment">
+                            <div class="post comment inline box">
+                                <div class="left cell">
+                                    <div class="title">
+                                        请问想学习PHP，是先从C++入门还是先学C#
+                                    </div>
+                                    <div class="post comment meta inline box">
+                                        <a class="ui grey circular label">蠢问题</a>
+                                        <div class="meta cell">
+                                            <i class="heart icon"></i>4人收藏
+                                        </div>
+                                        <div class="meta cell">
+                                            <i class="thumbs up icon"></i>共34个赞同
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right cell">
+                                    <a class="ui grey circular label">
+                                        <i class="comments icon"></i> 12
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segment">
+                            <div class="post comment inline box">
+                                <div class="left cell">
+                                    <div class="title">
+                                        请问想学习PHP，是先从C++入门还是先学C#
+                                    </div>
+                                    <div class="post comment meta inline box">
+                                        <a class="ui grey circular label">蠢问题</a>
+                                        <div class="meta cell">
+                                            <i class="heart icon"></i>4人收藏
+                                        </div>
+                                        <div class="meta cell">
+                                            <i class="thumbs up icon"></i>共34个赞同
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right cell">
+                                    <a class="ui grey circular label">
+                                        <i class="comments icon"></i> 12
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segment">
+                            <div class="post comment inline box">
+                                <div class="left cell">
+                                    <div class="title">
+                                        请问想学习PHP，是先从C++入门还是先学C#
+                                    </div>
+                                    <div class="post comment meta inline box">
+                                        <a class="ui grey circular label">蠢问题</a>
+                                        <div class="meta cell">
+                                            <i class="heart icon"></i>4人收藏
+                                        </div>
+                                        <div class="meta cell">
+                                            <i class="thumbs up icon"></i>共34个赞同
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right cell">
+                                    <a class="ui grey circular label">
+                                        <i class="comments icon"></i> 12
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="right ui rail home robot">
+                        <div class="ui sticky">
+                            <div class="ui yellow message">
+                                <a class="ui right ribbon red label">警告</a>
+                                <p>用户xxx向你发起了巫毒攻击，你正处在巫毒状态。你的发帖和回帖操作因此受到影响而延迟。</p>
+                                <a class="ui teal right ribbon label">天气预报</a>
+                                <p>天津滨海新区：晴，24-31℃</p>
+                            </div>
+                            <div class="home-robot-container">
+                                <div class="login-robot-body">
+                                    <img src="{{ asset('bundles/sundayui/img/robot/xmascap.png') }}" id="xmas_cap">
+                                    <div id="login-robot-bubble" class="ui red stacked segment">
+                                        <div class="ui text shape">
+                                            <div class="sides">
+                                                <div class="ui header side active"><h4>Merry Xmas</h4></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ asset('bundles/sundayui/js/Chart.min.js') }}"></script>
+    <script>
+        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+        var lineChartData = {
+            labels : ["January","February","March","April","May","June","July"],
+            datasets : [
+                {
+                    label: "My First dataset",
+                    fillColor : "rgba(220,220,220,0.2)",
+                    strokeColor : "rgba(220,220,220,1)",
+                    pointColor : "rgba(220,220,220,1)",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(220,220,220,1)",
+                    data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor : "rgba(151,187,205,0.2)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    pointColor : "rgba(151,187,205,1)",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(151,187,205,1)",
+                    data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+                }
+            ]
+
+        }
+
+        window.onload = function(){
+            var ctx = document.getElementById("canvas-activity").getContext("2d");
+            window.myLine = new Chart(ctx).Line(lineChartData, {
+                responsive: true
+            });
+        }
+
+
+    </script>
+
+{% endblock wsSundayContent %}
