@@ -25,9 +25,14 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "jms/translation-bundle": "dev-master",
         "jms/di-extra-bundle": "dev-master",
+        "jms/job-queue-bundle": "dev-master",
         "twig/extensions": "^1.4",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "liip/imagine-bundle": "^1.6"
+        "liip/imagine-bundle": "^1.6",
+        "fukuball/jieba-php": "dev-master",
+        "fabpot/goutte": "^3.1",
+        "soundasleep/html2text": "^0.3.4",
+        "gos/web-socket-bundle": "^1.8"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
@@ -63,6 +68,12 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
+        }
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.org"
         }
     }
 }

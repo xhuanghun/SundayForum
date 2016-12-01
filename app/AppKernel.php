@@ -29,7 +29,9 @@ class AppKernel extends Kernel
             new Sunday\UIBundle\SundayUIBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-
+            new Sunday\CommandBundle\SundayCommandBundle(),
+            new Gos\Bundle\WebSocketBundle\GosWebSocketBundle(),
+            new Gos\Bundle\PubSubRouterBundle\GosPubSubRouterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

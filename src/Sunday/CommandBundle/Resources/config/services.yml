@@ -1,0 +1,4 @@
+services:
+#    sunday_command.example:
+#        class: Sunday\CommandBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -14,6 +14,7 @@
         <script src="{{ asset('bundles/sundayui/js/gsap/TimelineLite.min.js') }}"></script>
         <script src="{{ asset('bundles/sundayui/js/gsap/TweenMax.min.js') }}"></script>
         <script src="{{ asset('bundles/sundayui/js/animation.js') }}"></script>
+        <script src="{{ asset('bundles/sundayui/js/custom.js') }}"></script>
         <script src="{{ asset('bundles/sundayui/Semantic-UI/semantic.min.js') }}"></script>
     {% endblock %}
     {% block customJavascript %}{% endblock customJavascript %}
@@ -23,6 +24,45 @@
 {% block body %}
     {% include 'SundayUIBundle:Form:fields.html.twig' %}
 {% endblock %}
-{% block javascripts %}{% endblock %}
+
+<div class="ui command dimmer transition hidden">
+    <div class="content">
+        <div class="center">
+            <i class="huge keyboard icon"></i>
+            <div class="ui transparent huge input" id="command-input">
+                <input type="text" id="command-input-text">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('commandToken') }}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('bundles/goswebsocket/js/vendor/autobahn.min.js') }}"></script>
+<script src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}"></script>
+{% block javascripts %}
+    <script type="text/javascript">
+        var webSocket = WS.connect("ws://127.0.0.1:8080");
+        function refreshMessage (message) {
+            console.log("Received message", message);
+            $("#igor_message").text(message);
+        }
+
+        webSocket.on("socket/connect", function(session) {
+            console.log("Successfully connected!");
+
+            session.subscribe('sunday/igor', function(uri, payload) {
+                if (payload.msg) {
+                    setTimeout(function () { refreshMessage(payload.msg) }, 1000);
+                }
+            });
+
+            session.publish("sunday/igor", "This is from websocket publish:)");
+        })
+
+        webSocket.on("socket/disconnect", function(error) {
+            //console.log("Disconnected for " + error.reason + "with code " + error.code);
+        })
+    </script>
+{% endblock %}
 </body>
 </html>

@@ -1,17 +1,23 @@
 <?php
 
-namespace Sunday\PostBundle\Entity;
+namespace Sunday\CommandBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Tests\Fixtures\User;
 
 /**
- * Report for Post, Comment, File, Gallery, Attachment
+ * Command
  *
- * @ORM\Table(name="sunday_report", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
- * @ORM\Entity(repositoryClass="Sunday\PostBundle\Repository\ReportRepository")
+ * @ORM\Table(name="sunday_command",
+ *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
+ *     indexes={
+ *         @ORM\Index(name="idx_command_checked", columns={"checked"}),
+ *         @ORM\Index(name="idx_command_token", columns={"token"})
+ *     })
+ * @ORM\Entity(repositoryClass="Sunday\CommandBundle\Repository\CommandRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Report
+class Command
 {
     /**
      * @var int
@@ -22,20 +28,42 @@ class Report
      */
     protected $id;
 
+
     /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="Sunday\UserBundle\Entity\User")
-     * @ORM\JoinColumn(referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="command_user_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $reporter;
+    protected $user;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="report_reason", type="text", nullable=true)
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
-    protected $reportReason;
+    protected $content;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $checked = false;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $generateJob = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=255)
+     */
+    protected $token;
 
     /**
      * @var \DateTime
@@ -52,27 +80,6 @@ class Report
     protected $updatedAt;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    protected $deleted;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(type="datetime", name="deleted_at", nullable=true)
-     */
-    protected $deletedAt;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    protected $validated;
-
-    /**
      * Pre persist event listener
      *
      * @ORM\PrePersist
@@ -82,6 +89,7 @@ class Report
         $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
         $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
     }
+
 
     /**
     ┌─────────────────────────────────────────────────────────────────────┐
@@ -106,7 +114,7 @@ class Report
     └─────────────────────────────────────────────────────────────────────┘░░
     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-     **/
+     */
 
     /**
      * Get id
@@ -119,27 +127,75 @@ class Report
     }
 
     /**
-     * Set reportReason
+     * Set content
      *
-     * @param string $reportReason
+     * @param string $content
      *
-     * @return Report
+     * @return Command
      */
-    public function setReportReason($reportReason)
+    public function setContent($content)
     {
-        $this->reportReason = $reportReason;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get reportReason
+     * Get content
      *
      * @return string
      */
-    public function getReportReason()
+    public function getContent()
     {
-        return $this->reportReason;
+        return $this->content;
+    }
+
+    /**
+     * Set checked
+     *
+     * @param boolean $checked
+     *
+     * @return Command
+     */
+    public function setChecked($checked)
+    {
+        $this->checked = $checked;
+
+        return $this;
+    }
+
+    /**
+     * Get checked
+     *
+     * @return boolean
+     */
+    public function getChecked()
+    {
+        return $this->checked;
+    }
+
+    /**
+     * Set generateJob
+     *
+     * @param boolean $generateJob
+     *
+     * @return Command
+     */
+    public function setGenerateJob($generateJob)
+    {
+        $this->generateJob = $generateJob;
+
+        return $this;
+    }
+
+    /**
+     * Get generateJob
+     *
+     * @return boolean
+     */
+    public function getGenerateJob()
+    {
+        return $this->generateJob;
     }
 
     /**
@@ -147,7 +203,7 @@ class Report
      *
      * @param \DateTime $createdAt
      *
-     * @return Report
+     * @return Command
      */
     public function setCreatedAt($createdAt)
     {
@@ -171,7 +227,7 @@ class Report
      *
      * @param \DateTime $updatedAt
      *
-     * @return Report
+     * @return Command
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -191,98 +247,50 @@ class Report
     }
 
     /**
-     * Set deleted
+     * Set user
      *
-     * @param boolean $deleted
+     * @param \Sunday\UserBundle\Entity\User $user
      *
-     * @return Report
+     * @return Command
      */
-    public function setDeleted($deleted)
+    public function setUser(\Sunday\UserBundle\Entity\User $user = null)
     {
-        $this->deleted = $deleted;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get deleted
-     *
-     * @return boolean
-     */
-    public function getDeleted()
-    {
-        return $this->deleted;
-    }
-
-    /**
-     * Set deletedAt
-     *
-     * @param \DateTime $deletedAt
-     *
-     * @return Report
-     */
-    public function setDeletedAt($deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get deletedAt
-     *
-     * @return \DateTime
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * Set validated
-     *
-     * @param boolean $validated
-     *
-     * @return Report
-     */
-    public function setValidated($validated)
-    {
-        $this->validated = $validated;
-
-        return $this;
-    }
-
-    /**
-     * Get validated
-     *
-     * @return boolean
-     */
-    public function getValidated()
-    {
-        return $this->validated;
-    }
-
-    /**
-     * Set reporter
-     *
-     * @param \Sunday\UserBundle\Entity\User $reporter
-     *
-     * @return Report
-     */
-    public function setReporter(\Sunday\UserBundle\Entity\User $reporter = null)
-    {
-        $this->reporter = $reporter;
-
-        return $this;
-    }
-
-    /**
-     * Get reporter
+     * Get user
      *
      * @return \Sunday\UserBundle\Entity\User
      */
-    public function getReporter()
+    public function getUser()
     {
-        return $this->reporter;
+        return $this->user;
+    }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     *
+     * @return Command
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 }

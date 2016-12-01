@@ -1,0 +1,4 @@
+igor_topic:
+    channel: sunday/igor
+    handler:
+        callback: 'sunday.igor.topic'

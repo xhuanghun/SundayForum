@@ -13,6 +13,36 @@
     filter: grayscale(1);
 }
 
+#command-input {
+    border-bottom: white;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    top: 20px;
+}
+
+#command-input input {
+    font-size: 1.5em;
+    color: white;
+    width: 20em;
+    height: 1.6em;
+}
+
+.igor-command-input {
+    margin-left: 10px;
+}
+
+#igor-command-input {
+    border-bottom: black;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    top: 5px;
+    font-size: 1.2em;
+}
+
+.igor-command-input-text {
+    width: 14em;
+}
+
 #forum-title {
     font-size: 1.5em;
 }
@@ -307,11 +337,24 @@
     left: 80px;
     text-align: left;
     padding: 3px 5px;
-    width: 90px;
+    width: 15em;
+}
+
+.bubble-container {
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+.bubble-container .img-bubble-triangle {
+    float: left;
+    position: absolute;
+    left: 80px;
+    top: 25px;
 }
 
 #sunday-body .home-robot-container {
-    margin-top: 20rem;
+    margin-top: 18rem;
+    margin-bottom: 1em;
 }
 
 #sunday-body .home-robot-body {

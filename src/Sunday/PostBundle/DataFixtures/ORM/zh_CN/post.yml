@@ -1,14 +1,24 @@
 Sunday\PostBundle\Entity\Post:
-    post{1..300}:
+    post{1..150}:
         author: @user*
         authorUsername: '@user*->username'
         subject: '<realText($maxNbChars = 70, $indexSize = 2)>'
         content: '<realText($maxNbChars = 500, $indexSize = 2)>'
         category: '@issue<numberBetween(1, 3)>'
         likeItUser: ['@user*']
+        reported: true
+        reports: ['@report_for_post<current()>']
+    post{151..300}:
+        author: @user*
+        authorUsername: '@user*->username'
+        subject: '<realText($maxNbChars = 70, $indexSize = 2)>'
+        content: '<realText($maxNbChars = 500, $indexSize = 2)>'
+        category: '@issue<numberBetween(1, 3)>'
+        likeItUser: ['@user*']
+        reported: false
 
 Sunday\PostBundle\Entity\PostComment:
-    p_comment{1..5000}:
+    p_comment{1..500}:
         author: @user*
         authorUsername: @user*->username
         content: '<realText($maxNbChars = 500, $indexSize = 2)>'
@@ -17,7 +27,17 @@ Sunday\PostBundle\Entity\PostComment:
         likeIt: '<numberBetween(0, 20)>'
         negative: '<numberBetween(0, 10)>'
         hasCommentPostscript: true
-    p_comment{5001..10000}:
+    p_comment{501..1000}:
+        author: @user*
+        authorUsername: @user*->username
+        content: '<realText($maxNbChars = 500, $indexSize = 2)>'
+        targetPost: @post*
+        score: '<randomFloat(2, 0, 1)>'
+        likeIt: '<numberBetween(0, 20)>'
+        negative: '<numberBetween(0, 10)>'
+        reported: true
+        reports: ['@report_for_comment<current()>']
+    p_comment{1001..10000}:
         author: @user*
         authorUsername: @user*->username
         content: '<realText($maxNbChars = 500, $indexSize = 2)>'
@@ -49,12 +69,19 @@ Sunday\PostBundle\Entity\PostCategory:
         description: 这里讨论 Sunday 项目开发的议题
 
 Sunday\PostBundle\Entity\Postscript:
-    script_of_post{1..300}:
+    script_of_post{1..100}:
         content: '<realText($maxNbChars = 200, $indexSize = 2)>'
         post: @post*
 
 Sunday\PostBundle\Entity\CommentPostscript:
-    script_of_comment{1..5000}:
+    script_of_comment{1..500}:
         content: '<realText($maxNbChars = 200, $indexSize = 2)>'
         comment: @p_comment<current()>
 
+Sunday\PostBundle\Entity\Report:
+    report_for_post{1..150}:
+        reporter: @user*
+        reportReason: '<realText($maxNbChars = 200, $indexSize = 2)>'
+    report_for_comment{501..1000}:
+        reporter: @user*
+        reportReason: '<realText($maxNbChars = 200, $indexSize = 2)>'

@@ -1,3 +1,6 @@
 post:
     postscript:
         label: Postscript
+    report:
+        warning: It is reported. Once another user report, it becomes invisible and will be review by admin.
+        reason: Report reason

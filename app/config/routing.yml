@@ -36,6 +36,11 @@ sunday_user:
     type:     annotation
     prefix:   /
 
+sunday_command:
+    resource: "@SundayCommandBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 

@@ -1,0 +1,24 @@
+{% block igorBody %}
+    <div class="home-robot-container">
+        <div class="login-robot-body">
+            <div class="bubble-container">
+                <img src="{{ asset('bundles/sundayui/img/robot/bubble_triangle.png') }}" class="img-bubble-triangle" >
+                <div id="login-robot-bubble" class="ui red stacked segment">
+                    <div class="ui text shape">
+                        <div class="sides">
+                            <div class="ui header side active"><h4 id="igor_message">我不知道该说些什么, 我就说一堆废话好了, 我叫雨果, 是你的管家, 你有什么需要帮助的可以按 Ctrl + i 来给我下达指令.</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block igorCommandInput %}
+    <div class="igor-command-input" style="visibility: hidden" id="igor-command">
+        <i class="large keyboard icon"></i>
+        <div class="ui transparent huge input" id="igor-command-input">
+            <input type="text" class="igor-command-input-text">
+        </div>
+    </div>
+{% endblock %}

@@ -17,7 +17,7 @@ use Sunday\MediaBundle\Entity\Attachment;
  * @ORM\Entity(repositoryClass="Sunday\PostBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post extends Report
+class Post
 {
     /**
      * @var int
@@ -117,6 +117,17 @@ class Post extends Report
     protected $reported;
 
     /**
+     * @var Report[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Report")
+     * @ORM\JoinTable(name="sunday_report_post",
+     *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="report_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    protected $reports;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -175,7 +186,7 @@ class Post extends Report
     /**
      * @var Postscript[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Postscript", mappedBy="post", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Postscript", mappedBy="post")
      * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     protected $postscript;
@@ -223,6 +234,7 @@ class Post extends Report
         $this->likeItUser = new \Doctrine\Common\Collections\ArrayCollection();
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->postscript = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reports = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -929,30 +941,6 @@ class Post extends Report
     }
 
     /**
-     * Set reporter
-     *
-     * @param \Sunday\UserBundle\Entity\User $reporter
-     *
-     * @return Post
-     */
-    public function setReporter(\Sunday\UserBundle\Entity\User $reporter = null)
-    {
-        $this->reporter = $reporter;
-
-        return $this;
-    }
-
-    /**
-     * Get reporter
-     *
-     * @return \Sunday\UserBundle\Entity\User
-     */
-    public function getReporter()
-    {
-        return $this->reporter;
-    }
-
-    /**
      * Set slug
      *
      * @param \int $slug
@@ -998,5 +986,39 @@ class Post extends Report
     public function getEnabledAt()
     {
         return $this->enabledAt;
+    }
+
+    /**
+     * Add report
+     *
+     * @param \Sunday\PostBundle\Entity\Report $report
+     *
+     * @return Post
+     */
+    public function addReport(\Sunday\PostBundle\Entity\Report $report)
+    {
+        $this->reports[] = $report;
+
+        return $this;
+    }
+
+    /**
+     * Remove report
+     *
+     * @param \Sunday\PostBundle\Entity\Report $report
+     */
+    public function removeReport(\Sunday\PostBundle\Entity\Report $report)
+    {
+        $this->reports->removeElement($report);
+    }
+
+    /**
+     * Get reports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReports()
+    {
+        return $this->reports;
     }
 }

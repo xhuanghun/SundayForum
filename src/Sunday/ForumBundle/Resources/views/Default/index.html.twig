@@ -1,4 +1,6 @@
 {% extends "SundayForumBundle::layout.html.twig" %}
+{% use "SundayUIBundle:Igor:igor.html.twig" %}
+
 {% block wsSundayContent %}
     <div class="ui vertical segment">
         <div class="ui grid">
@@ -255,17 +257,12 @@
                                 <a class="ui teal right ribbon label">天气预报</a>
                                 <p>天津滨海新区：晴，24-31℃</p>
                             </div>
-                            <div class="home-robot-container">
-                                <div class="login-robot-body">
-                                    <div id="login-robot-bubble" class="ui red stacked segment">
-                                        <div class="ui text shape">
-                                            <div class="sides">
-                                                <div class="ui header side active"><h4>亲，上午 36+ 回帖，收益健康 0.3+ </h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% block igorBody %}
+                                 {{ parent() }}
+                            {% endblock %}
+                            {% block igorCommandInput %}
+                                {{ parent() }}
+                            {% endblock %}
                         </div>
                     </div>
                 </div>

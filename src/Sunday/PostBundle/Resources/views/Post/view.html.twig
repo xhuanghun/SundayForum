@@ -71,6 +71,15 @@
                                         </div>
                                     </div>
                                 {% endfor %}
+                                {% if post.reported %}
+                                    {% for report in post.reports %}
+                                        <div class="ui yellow message">
+                                            <i class="warning sign icon"></i>
+                                            {{ 'post.report.warning'|trans({}, 'SundayPostBundle') }}
+                                            {{ 'post.report.reason'|trans({}, 'SundayPostBundle') }} :  {{ report.reportReason }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         </div>
 
@@ -119,10 +128,15 @@
                                         <div class="ui {{ comment.author.businessUnit.color }} message">{{ commentPostscript.content }}</div>
                                     {% endfor %}
                                 {% endif %}
-                                <div class="ui bottom attached warning message">
-                                    <i class="warning icon"></i>
-                                    举报测试, 此回复已经被举报, 再次举报将直接屏蔽此回复!
-                                </div>
+                                {% if comment.reported %}
+                                    {% for report in comment.reports %}
+                                        <div class="ui yellow message">
+                                            <i class="warning sign icon"></i>
+                                            {{ 'post.report.warning'|trans({}, 'SundayPostBundle') }}
+                                            {{ 'post.report.reason'|trans({}, 'SundayPostBundle') }} :  {{ report.reportReason }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         {% endfor %}
 

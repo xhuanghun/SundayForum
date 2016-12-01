@@ -173,6 +173,24 @@ class Comment
     protected $hasCommentPostscript;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $reported;
+
+    /**
+     * @var Report[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Report")
+     * @ORM\JoinTable(name="sunday_report_comment",
+     *      joinColumns={@ORM\JoinColumn(name="comment_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="report_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    protected $reports;
+
+    /**
      * Pre persist event listener
      *
      * @ORM\PrePersist
@@ -223,6 +241,7 @@ class Comment
     public function __construct()
     {
         $this->likeItUsers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reports = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -700,5 +719,63 @@ class Comment
     public function getCommentPostscript()
     {
         return $this->commentPostscript;
+    }
+
+    /**
+     * Set reported
+     *
+     * @param boolean $reported
+     *
+     * @return Comment
+     */
+    public function setReported($reported)
+    {
+        $this->reported = $reported;
+
+        return $this;
+    }
+
+    /**
+     * Get reported
+     *
+     * @return boolean
+     */
+    public function getReported()
+    {
+        return $this->reported;
+    }
+
+    /**
+     * Add report
+     *
+     * @param \Sunday\PostBundle\Entity\Report $report
+     *
+     * @return Comment
+     */
+    public function addReport(\Sunday\PostBundle\Entity\Report $report)
+    {
+        $this->reports[] = $report;
+
+        return $this;
+    }
+
+    /**
+     * Remove report
+     *
+     * @param \Sunday\PostBundle\Entity\Report $report
+     */
+    public function removeReport(\Sunday\PostBundle\Entity\Report $report)
+    {
+        $this->reports->removeElement($report);
+    }
+
+    /**
+     * Get reports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReports()
+    {
+        return $this->reports;
     }
 }
