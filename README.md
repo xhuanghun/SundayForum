@@ -7,6 +7,9 @@ This is a forum web application, but it could be different picture from phpbb or
 
 ### Finished Job List
 
+![FrontPage]
+(https://raw.githubusercontent.com/TonyGao/SundayForum/master/src/Sunday/ForumBundle/Resources/doc/image/Sunday%20Forum%2001.png)
+
 ### Todo List
 
 - Web design. We use Semantic-UI as its UI library.
