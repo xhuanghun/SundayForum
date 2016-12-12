@@ -1,5 +1,7 @@
 services:
     sunday_igor.topic_service:
         class: Sunday\ForumBundle\Topic\SundayIgorTopic
+        arguments:
+            - @gos_web_socket.websocket.client_manipulator
         tags:
             - { name: gos_web_socket.topic }

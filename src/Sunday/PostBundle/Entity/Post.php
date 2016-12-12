@@ -177,7 +177,7 @@ class Post
     protected $comments;
 
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Column(type="string", unique=true)
      */
@@ -943,11 +943,11 @@ class Post
     /**
      * Set slug
      *
-     * @param \int $slug
+     * @param \string $slug
      *
      * @return Post
      */
-    public function setSlug(\int $slug)
+    public function setSlug($slug)
     {
         $this->slug = $slug;
 

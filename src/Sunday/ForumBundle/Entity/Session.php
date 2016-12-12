@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Session for the PDOSessionHandler
  *
- * @ORM\Table(name="sunday_session")
+ * @ORM\Table(name="sessions")
  * @ORM\Entity(repositoryClass="Sunday\ForumBundle\Repository\SessionRepository")
  */
 class Session

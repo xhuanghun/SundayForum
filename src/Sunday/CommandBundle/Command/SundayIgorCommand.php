@@ -49,6 +49,7 @@ class SundayIgorCommand extends ContainerAwareCommand
 
         $this->output = $output;
         $rootDir = $this->getContainer()->get('kernel')->getRootDir();
+        $pusher = $this->getContainer()->get('gos_web_socket.wamp.pusher');
         $dicPath = $rootDir.'/../vendor/fukuball/jieba-php/src/dict/dict.test.txt';
 
         Jieba::init();
@@ -103,12 +104,18 @@ class SundayIgorCommand extends ContainerAwareCommand
                         ->findOneBy(['token' => $file->getRelativePathname()]);
 
                     $commandContent = $command->getContent();
+                    $user = $command->getUser();
 
                     $segList = Jieba::cut($commandContent);
 
                     $name = implode(array_slice($segList, 0, -2));
                     $function = array_slice($segList, -1, 1)[0] . array_slice($segList, -2, 1)[0];
                     $expressionResult = $this->language->evaluate("$function('$name')");
+
+                    if ($user) {
+                        $pusher->push(['data' => $expressionResult, 'username' => 'tony'], 'igor_topic', []);
+                    }
+
                     $this->output->writeln($expressionResult);
 
                     $command->setChecked(true);

@@ -39,6 +39,26 @@ $(document)
             })
         ;
 
+
+        /** Something wrong, prepare for review
+        var messageBoxHeight = $("#right_message").height();
+        var countN = 0;
+
+        function calculateHeight() {
+            setTimeout(function(){ messageBoxHeight = $("#right_message").height(); }, 1000);
+        }
+
+        function removeTopMessage() {
+            console.log(countN);
+            $("#right_message a").eq(countN).remove();
+            $("#right_message p").eq(countN).remove();
+        }
+
+        if(countN < 3) {
+            removeTopMessage();
+            countN = countN + 1;
+        } **/
+
         /**
          *  it's terrible, make the fans of my macbook pro crazy >_<
          */

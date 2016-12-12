@@ -106,12 +106,18 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - name: twig.extension
+    pdo:
+        class: PDO
+        arguments:
+            dsn: mysql:host=%database_host%;dbname=%database_name%
+            db_user: %database_user%
+            db_password: %database_password%
+        calls:
+            - [ setAttribute, [3, 2] ] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
     session.handler.pdo:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
         public: false
-        arguments:
-            - 'mysql:host=%database_host%;dbname=%database_name%'
-            - { db_table: sunday_session, db_username: '%database_user%', db_password: '%database_password%' }
+        arguments: [@pdo, {lock_mode: 0, db_table: sunday_session}]
 
 jms_translation:
     configs:
@@ -149,14 +155,15 @@ liip_imagine:
 gos_web_socket:
     server:
         port: 8080
-        host: 127.0.0.1
+        host: forum.sunday.com
         router:
             resources:
                 - @SundayForumBundle/Resources/config/pubsub/routing.yml
     client:
         firewall: main
         session_handler: @session.handler.pdo
+
     pushers:
         wamp:
-            host: 127.0.0.1
-            port: 1337
+            host: forum.sunday.com
+            port: 8080

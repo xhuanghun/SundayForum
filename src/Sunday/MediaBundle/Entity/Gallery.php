@@ -475,13 +475,23 @@ class Gallery
     }
 
     /**
+     * Get reports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReports()
+    {
+        return $this->reports;
+    }
+
+    /**
      * Add report
      *
-     * @param \Sunday\MediaBundle\Entity\Report $report
+     * @param \Sunday\PostBundle\Entity\Report $report
      *
      * @return Gallery
      */
-    public function addReport(\Sunday\MediaBundle\Entity\Report $report)
+    public function addReport(\Sunday\PostBundle\Entity\Report $report)
     {
         $this->reports[] = $report;
 
@@ -491,20 +501,10 @@ class Gallery
     /**
      * Remove report
      *
-     * @param \Sunday\MediaBundle\Entity\Report $report
+     * @param \Sunday\PostBundle\Entity\Report $report
      */
-    public function removeReport(\Sunday\MediaBundle\Entity\Report $report)
+    public function removeReport(\Sunday\PostBundle\Entity\Report $report)
     {
         $this->reports->removeElement($report);
-    }
-
-    /**
-     * Get reports
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getReports()
-    {
-        return $this->reports;
     }
 }
